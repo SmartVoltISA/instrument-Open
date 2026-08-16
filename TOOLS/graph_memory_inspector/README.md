@@ -1,6 +1,6 @@
 # Graph Memory Inspector v0.1
 
-**Status:** VERIFIED (working test suite + CI specification preserved; public portable copy)
+**Status:** WORKING (original test suite and validation model ported; public CI still requires a run)
 
 ## Назначение
 
@@ -35,41 +35,23 @@ Read-only инструмент для проверки структуры гра
 
 Этот экземпляр очищен от данных конкретного проекта. Пользователь подставляет собственный граф в `graph` и получает собственный результат проверки.
 
-Пример:
-
-```python
-from inspector import inspect_graph
-
-my_graph = {
-    "nodes": [
-        {"id": "A", "provenance": "user:A"},
-        {"id": "B", "provenance": "user:B"},
-    ],
-    "relations": [
-        {
-            "id": "r1",
-            "source": "A",
-            "target": "B",
-            "type": "supports",
-            "provenance": "user:r1",
-        }
-    ],
-}
-
-findings = inspect_graph(my_graph)
-```
-
 ## Проверка
 
-Оригинальный набор тестов перенесён без проектных данных. CI запускает `python -m unittest -v test_inspector.py` на Python 3.12.
+Перенесён оригинальный исполняемый набор тестов без проектных данных. Локальный запуск:
+
+```bash
+cd TOOLS/graph_memory_inspector
+python -m unittest -v test_inspector.py
+```
+
+Оригинальная CI-конфигурация использует Python 3.12. В публичной копии статус пока `WORKING`, пока этот набор не будет отдельно прогнан в её собственном CI.
 
 ## Материалы
 
 - `inspector.py` — ядро;
 - `test_inspector.py` — исполняемые проверки;
 - `EDGE_MODEL.md` — модель first-class связи;
-- `fixtures/README.md` — спецификация детерминированных тестовых случаев;
-- `CI.md` — воспроизводимая CI-проверка.
+- `fixtures/README.md` — спецификация детерминированных тестовых случаев.
 
 ## Ограничения
 
