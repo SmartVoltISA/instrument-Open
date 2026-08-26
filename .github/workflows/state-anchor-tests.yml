@@ -18,5 +18,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m py_compile TOOLS/state_anchor_adapter/state_anchor_adapter.py TOOLS/state_anchor_adapter/continuity_risk_detector.py TOOLS/state_anchor_adapter/adaptive_checkpoint_gate.py
-      - run: python -m pytest -q TOOLS/state_anchor_adapter/tests
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Run syntax checks
+        run: python -m py_compile TOOLS/state_anchor_adapter/state_anchor_adapter.py TOOLS/state_anchor_adapter/continuity_risk_detector.py TOOLS/state_anchor_adapter/adaptive_checkpoint_gate.py
+      - name: Run tests
+        run: python -m pytest -q TOOLS/state_anchor_adapter/tests
